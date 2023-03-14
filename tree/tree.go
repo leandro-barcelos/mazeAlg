@@ -1,10 +1,10 @@
-package t2
+package tree
 
 type Tree struct {
 	parent *Tree
 }
 
-func (tree Tree) Root() (root Tree) {
+func (tree *Tree) Root() *Tree {
 	if tree.parent == nil {
 		return tree
 	}
@@ -12,12 +12,10 @@ func (tree Tree) Root() (root Tree) {
 	return tree.parent.Root()
 }
 
-func (t1 Tree) Is_connected(t2 Tree) (o bool) {
+func (t1 *Tree) Is_connected(t2 *Tree) bool {
 	return t1.Root() == t2.Root()
 }
 
-func (t1 *Tree) Connect(t2 Tree) {
-	t2Root := t2.Root()
-	t1Root := t1.Root()
-	t2Root.parent = &t1Root
+func (t1 *Tree) Connect(t2 *Tree) {
+	t2.Root().parent = t1
 }
